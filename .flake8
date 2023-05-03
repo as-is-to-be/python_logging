@@ -9,6 +9,8 @@ extend-ignore =
     E501
     # annotate self 
     ANN101
+    # missing return for special functions
+    ANN204
 exclude = data,reports,.git,.pytest_cache
 
 #Ignore no return annotation for test files 

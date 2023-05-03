@@ -5,15 +5,13 @@ from types import TracebackType
 from logtail import LogtailHandler
 
 DEFAULT_HOST = "https://in.logtail.com"
-DEFAULT_RAISE_EXCEPTIONS = False
-DEFAULT_INCLUDE_EXTRA_ATTRIBUTES = True
 
 
 def configure_logger(logtail_token: str) -> logging.Logger:
     stdout_handler = logging.StreamHandler(stream=sys.stdout)
     stdout_handler.setFormatter(logging.Formatter("[%(levelname)s] %(message)s"))
 
-    logging.getLogger().handlers = []  # disable AWS root logger
+    logging.getLogger().handlers = []
 
     logger = logging.getLogger()
     logger.handlers = []
