@@ -1,0 +1,15 @@
+[flake8]
+# Recommend matching the black line length (default 88),
+# rather than using the flake8 default of 79:
+max-line-length = 100
+extend-ignore =
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    E203,
+    # Line too long (even after black)
+    E501
+    # annotate self 
+    ANN101
+exclude = data,reports,.git,.pytest_cache
+
+#Ignore no return annotation for test files 
+per-file-ignores = ./tests/*.py:ANN201 

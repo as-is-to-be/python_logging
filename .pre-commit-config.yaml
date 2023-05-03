@@ -1,0 +1,72 @@
+repos:
+  # Automatic source code formatting with Black
+- repo: https://github.com/psf/black
+  rev: 22.12.0
+  hooks:
+  - id: black
+    args: [--preview, --line-length=100, --config=pyproject.toml]
+
+  # Enforce style with Flake8
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+        #exclude: ^app/tests/ #exclude tests dir from hooks
+    args:
+    - --config=.flake8
+    additional_dependencies: [flake8-annotations]
+
+  # Reorder python imports
+- repo: https://github.com/PyCQA/isort
+  rev: 5.12.0
+  hooks:
+  - id: isort
+    args:
+    - --profile=black
+    - --trailing-comma
+    - --atomic
+
+  # Upgrade syntax for newer versions of the language
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.2.0
+  hooks:
+  - id: pyupgrade
+    args: [--py37-plus]
+
+  #I would suggest this one, but there is a lot of error coming with it,
+  #probably better to be implemented by someone with more knowledge about the tool (our app).
+  #
+  #- repo: https://github.com/pre-commit/mirrors-mypy
+  #  rev: v0.982
+  #  hooks:
+  #  - id: mypy
+  #    exclude: ^(alembic/|versions/)
+
+  # Format YAML files prettily
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.5.0
+  hooks:
+  - id: pretty-format-yaml
+    args: [--autofix, --indent, '2']
+
+  # Syntax check with pre-commit out-of-the-box hooks
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-ast
+  - id: check-yaml
+  - id: check-merge-conflict
+    #- id: check-json # no file
+    #- id: pretty-format-json # no file
+    #  args: [--autofix, --no-ensure-ascii, --no-sort-keys]
+    #- id: check-added-large-files
+    #  args: [--maxkb=200]
+    #- id: requirements-txt-fixer # no file
+    #- id: no-commit-to-branch
+    #  args: [--pattern, '^(?!((dev|master|staging\/[a-zA-Z0-9\-.]+)$).*']
+
+    # strip output from Jupyter and IPython notebooks
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.6.1
+  hooks:
+  - id: nbstripout

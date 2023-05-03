@@ -1,0 +1,1 @@
+This packacke provides common logging setup that can be reused across projects. 
